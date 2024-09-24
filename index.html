@@ -13,14 +13,74 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <header>
+    
       <h1>
         BIENVENIDO 
       </h1>
       <h2>
         REGISTRO DE LLEGADA Y SALIDA
       </h2>
-    </header>
     
+      <div class="container">
+        <h3>Registro de Entrada y Salida de Personal</h2>
+        
+        <form id="registroForm">
+            <label for="nombre">Nombre del empleado:</label><br>
+            <input type="text" id="nombre" name="nombre" required><br><br>
+
+            <label for="fecha">Fecha:</label><br>
+            <input type="date" id="fecha" name="fecha" required><br><br>
+
+            <label for="horaEntrada">Hora de entrada:</label><br>
+            <input type="time" id="horaEntrada" name="horaEntrada" required><br><br>
+
+            <label for="horaSalida">Hora de salida:</label><br>
+            <input type="time" id="horaSalida" name="horaSalida" required><br><br>
+
+            <input type="submit" value="Registrar">
+        </form>
+
+        <h4>Registros:</h4>
+        <table id="registroTabla">
+            <thead>
+                <tr>
+                    <th>Nombre del empleado</th>
+                    <th>Fecha</th>
+                    <th>Hora de entrada</th>
+                    <th>Hora de salida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán las filas dinámicamente -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+      document.getElementById('registroForm').addEventListener('submit', function(event) {
+          event.preventDefault(); // Evitar la recarga de la página
+
+          const nombre = document.getElementById('nombre').value;
+          const fecha = document.getElementById('fecha').value;
+          const horaEntrada = document.getElementById('horaEntrada').value;
+          const horaSalida = document.getElementById('horaSalida').value;
+
+          // Crear una nueva fila con los datos del formulario
+          const tabla = document.getElementById('registroTabla').getElementsByTagName('tbody')[0];
+          const nuevaFila = tabla.insertRow();
+
+          const celdaNombre = nuevaFila.insertCell(0);
+          const celdaFecha = nuevaFila.insertCell(1);
+          const celdaHoraEntrada = nuevaFila.insertCell(2);
+          const celdaHoraSalida = nuevaFila.insertCell(3);
+
+          celdaNombre.textContent = nombre;
+          celdaFecha.textContent = fecha;
+          celdaHoraEntrada.textContent = horaEntrada;
+          celdaHoraSalida.textContent = horaSalida;
+
+          // Limpiar los campos del formulario después de agregar el registro
+          document.getElementById('registroForm').reset();
+      });
+  </script>
   </body>
 </html>
